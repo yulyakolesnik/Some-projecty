@@ -1,0 +1,39 @@
+import timeit
+import sys # Определяем количество элементов
+N = 1000 # Заполнение коллекций
+my_list = list(range(N))
+my_tuple = tuple(range(N))
+my_set = set(range(N)) # Функции для операций
+def list_operations(): 
+    my_list.append(N) # Вставка
+    exists = N in my_list # Поиск
+    my_list.remove(N) # Удаление
+    for _ in my_list: # Итерация
+        pass
+def tuple_operations():
+    exists = N in my_tuple # Поиск (кортежи неизменяемы, вставка и удаление не возможны)
+    for _ in my_tuple: # Итерация
+        pass
+def set_operations():
+    my_set.add(N) # Вставка
+    exists = N in my_set # Поиск
+    my_set.remove(N) # Удаление
+    for _ in my_set: # Итерация
+        pass
+# Измеряем скорость доступа
+list_time = timeit.timeit(list_operations, number=100)
+tuple_time = timeit.timeit(tuple_operations, number=100)
+set_time = timeit.timeit(set_operations, number=100)
+# Получаем потребляемость памяти
+list_size = sys.getsizeof(my_list)
+tuple_size = sys.getsizeof(my_tuple)
+set_size = sys.getsizeof(my_set)
+# Печатаем результаты
+print("Скорость доступа операций:")
+print(f"Список: {list_time:.5f} секунд")
+print(f"Кортеж: {tuple_time:.5f} секунд (только поиск и итерация)")
+print(f"Множество: {set_time:.5f} секунд")
+print("\nРазмеры потребляемости памяти:")
+print(f"Список: {list_size} байт")
+print(f"Кортеж: {tuple_size} байт")
+print(f"Множество: {set_size} байт")
